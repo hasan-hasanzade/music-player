@@ -79,14 +79,53 @@ function pauseSong() {
 
 // TERNARY OPERATOR ? :
 
-playBtn.onclick = function() {
-   // if(isPlaying) {
-   //    pauseSong()
-   // }
-   // else {
-   //    playSong()
-   // }
-   isPlaying ? pauseSong() : playSong()
-}
+// playBtn.onclick = function() {
+//    // if(isPlaying) {
+//    //    pauseSong()
+//    // }
+//    // else {
+//    //    playSong()
+//    // }
+//    isPlaying ? pauseSong() : playSong()
+// }
 
 // playBtn.addEventListener('click', ()=> ())
+
+playBtn.addEventListener('click', () =>(isPlaying? pauseSong() : playSong()))
+
+
+function loadSong(m) {
+   title.textContent = m.displayName
+   artist.textContent = m.artist
+   audio.src = `./music/${m.name}.mp3`
+}
+
+
+let songIndex = 0
+
+function prevSong(){
+   // songIndex = songIndex - 1
+   // songIndex -=1
+   songIndex-- //decrement
+   if(songIndex <0) {
+      songIndex = songs.length -1
+   }
+   loadSong(songs[songIndex])
+   playSong()
+}
+
+
+function nextSong() {
+   songIndex++
+   if(songIndex > songs.length-1) {
+      songIndex = 0
+   }
+
+   loadSong(songs[songIndex])
+   playSong()
+}
+
+loadSong(songs[songIndex])
+
+prevBtn.addEventListener('click', prevSong)
+nextBtn.addEventListener('click', nextSong)
